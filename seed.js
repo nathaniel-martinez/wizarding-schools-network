@@ -1,4 +1,4 @@
-const { db } = require("./server/db");
+const { db, Sequelize } = require("./server/db");
 const { green, red } = require("chalk");
 
 // require your models here
@@ -145,7 +145,39 @@ const students = [
 const seed = async () => {
   try {
     await db.sync({ force: true });
+    
+  const Campuses = db.define(
+	"wizardingSchool",
+	  {name: {
+	  	type: Sequelize.STRING(80),
+		unique: true,
+	  },
+		  address: {allowNull: false, type: Sequelize.STRING(80)}, description: Sequelize.TEXT, imageUrl: Sequelize.STRING(200)}
+  );
 
+  const Students = db.define(
+	"student", {
+		firstName: {allowNull: false, type: Sequelize.STRING(20)},
+		lastName: {allowNull: false, type: Sequelize.STRING(20)},
+		email: {type: Sequelize.STRING(80), allowNull: false, unique: true, validate: {isEmail: {msg: 'Invalid Email'}}},
+		imageUrl: {type: Sequelize.STRING(200), defaultValue: 'https://i.ibb.co/c2WNq2D/krum.webp'},
+		magicabilityscore: {type: Sequelize.FLOAT, allowNull: false, validate: {
+			isInRange(value){
+				if(value < 0.0 || value > 10.0){
+					throw new Error("Magic Ability Score is out of range. It must be 0<=x<=10.");
+				}
+			}
+		}, defaultValue: 0.0}
+	}
+  );
+
+Students.belongsTo(Campuses, {
+	  foreignKey: "campusId"
+});
+console.log(Object.keys(db.models)); //delete later
+
+  await db.sync({ force: true });
+	  
     await Promise.all(
       campuses.map((campus) => {
         return Campuses.create(campus);
@@ -159,7 +191,6 @@ const seed = async () => {
     );
 
     console.log(green("WINGARDIUM LEVIOSA! Seeding successful!"));
-    db.close();
   } catch (err) {
     console.error(red("Bloody Hell! Something went wrong!"));
     console.error(err);
@@ -167,4 +198,4 @@ const seed = async () => {
   }
 };
 
-seed();
+module.exports = seed;
