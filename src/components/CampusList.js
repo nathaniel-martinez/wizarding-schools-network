@@ -22,7 +22,7 @@ const CampusList = () => {
 			})
 			.then((data) => {
 				setCampusLIs(data.map((e) => {
-					return (<li><Link to={`/wizarding-schools/${e.id}`}>{e.name}</Link><DeleteCampus campusId={e.id}/><img src={e.imageUrl}/></li>);
+					return (<li style={{ marginLeft: "40px", marginTop: "40px", marginBottom: "40px" }}><Link to={`/wizarding-schools/${e.id}`}>{e.name}</Link><DeleteCampus campusId={e.id}/><img style={{ width: "200px", height: "200px" }} src={e.imageUrl}/></li>);
 				}));
 			})
 	}, [render])
@@ -33,12 +33,15 @@ const CampusList = () => {
 	}
 	else{
 		return(
-			<>
+			<div className="bg-dark">
 				<CampusRender.Provider value={{render, setRender}}>
-					<ul>{campusLIs}</ul>
-					<CreateCampus/>
+					<h1 className="text-center text-light">Campus List</h1>
+					<div className="d-flex justify-content-center">
+							<ul className="flex-fill">{campusLIs}</ul>
+							<div className="flex-fill"><CreateCampus/></div>
+					</div>
 				</CampusRender.Provider>
-			</>
+			</div>
 		);
 	}
 };

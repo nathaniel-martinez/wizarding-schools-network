@@ -10,7 +10,6 @@ import Student from "./Student.js";
 const Root = () => {
   return (
     <div className="navigation">
-	<Navbar/>
       <Routes>
         <Route path="/" element={<Main />} />
 	  <Route path="/wizarding-schools" element={<CampusList/>}/>

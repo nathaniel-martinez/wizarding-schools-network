@@ -10,7 +10,12 @@ const Campus = () => {
 	const [campusObj, setCampusObj] = useState(null);
 	const [campusLI, setCampusLI] = useState(null);
 	const [render, setRender] = useState(true);
-
+	const centerStyle = {
+		position: "absolute",
+		top: "50%",
+		left: "50%",
+		transform: "translate(-50%, -50%)"
+	};
 	useEffect(() => {
 		axios.get(`http://localhost:3000/api/singleCampus/${wizardingSchoolId}`)
 			.then((res) => {
@@ -20,8 +25,8 @@ const Campus = () => {
 			})
 			.then((data) => {
 				setCampusLI(<li>
-					<div>{data.dataValues.name}</div>
-					<img src={data.dataValues.imageUrl}/>
+					<h1 className="text-center text-light">{data.dataValues.name}</h1>
+					<img style={{ heigt: "500px", width: "500px" }} className={centerStyle} src={data.dataValues.imageUrl}/>
 					<div>Students</div>
 					<div>
 						{data.students.map((e) => {
@@ -37,12 +42,14 @@ const Campus = () => {
 	}
 	else{
 		return(
-			<>
+			<div className="bg-dark">
 				<SingleCampusRender.Provider value={{ render, setRender }}>
-					<ul>{campusLI}</ul>
-					<UpdateCampus campusId={wizardingSchoolId}/>
+					<div className="d-flex justify-content-center">
+							<ul className="flex-fill">{campusLI}</ul>
+							<div className="flex-fill"><UpdateCampus campusId={wizardingSchoolId}/></div>
+					</div>
 				</SingleCampusRender.Provider>
-			</>
+			</div>
 		);
 	}
 };
