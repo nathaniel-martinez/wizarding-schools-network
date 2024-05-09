@@ -11,7 +11,7 @@ const DeleteStudent = ({ studentId }) => {
 	}
 
   return (
-    <div>
+    <div style={{ position: "absolute", right: "0" }}>
 	  <button onClick={deleteStudentFunc}>X</button>
     </div>
   );

@@ -22,7 +22,7 @@ const CampusList = () => {
 			})
 			.then((data) => {
 				setCampusLIs(data.map((e) => {
-					return (<li style={{ marginLeft: "40px", marginTop: "40px", marginBottom: "40px" }}><Link to={`/wizarding-schools/${e.id}`}>{e.name}</Link><DeleteCampus campusId={e.id}/><img style={{ width: "200px", height: "200px" }} src={e.imageUrl}/></li>);
+					return (<li className="d-flex justify-content-center" style={{ minHeight: "350px", marginTop: "40px", marginBottom: "40px" }}><div className="container" style={{ width: "40%", position: "relative" }}><div className="row"><div style={{ position: "relative" }} className="col"><Link to={`/wizarding-schools/${e.id}`}>{e.name}</Link></div><div className="col"><DeleteCampus campusId={e.id}/></div></div><div className="row"><div style={{ position: "relative" }} className="col"><img style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "200px", height: "200px" }} src={e.imageUrl}/></div></div></div></li>);
 				}));
 			})
 	}, [render])
@@ -36,9 +36,8 @@ const CampusList = () => {
 			<div className="bg-dark">
 				<CampusRender.Provider value={{render, setRender}}>
 					<h1 className="text-center text-light">Campus List</h1>
-					<div className="d-flex justify-content-center">
-							<ul className="flex-fill">{campusLIs}</ul>
-							<div className="flex-fill"><CreateCampus/></div>
+					<div className=" d-flex justify-content-center">
+							<ul className="col-md-6 flex-fill">{campusLIs}</ul>
 					</div>
 				</CampusRender.Provider>
 			</div>

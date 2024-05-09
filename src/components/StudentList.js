@@ -22,7 +22,7 @@ const StudentList = () => {
 			})
 			.then((data) => {
 				setStudentLIs(data.map((e) => {
-					return (<li><Link to={`/students/${e.id}`}>{e.firstName}</Link><DeleteStudent studentId={e.id}/><img src={e.imageUrl}/></li>);
+					return (<li><Link style={{ marginRight: "5px" }} to={`/students/${e.id}`}>{e.firstName}</Link><DeleteStudent studentId={e.id}/><img src={e.imageUrl}/></li>);
 				}));
 			})
 	}, [render])
