@@ -22,7 +22,7 @@ const CampusList = () => {
 			})
 			.then((data) => {
 				setCampusLIs(data.map((e) => {
-					return (<li className="d-flex justify-content-center" style={{ minHeight: "350px", marginTop: "40px", marginBottom: "40px" }}><div className="container" style={{ width: "40%", position: "relative" }}><div className="row"><div style={{ position: "relative" }} className="col"><Link to={`/wizarding-schools/${e.id}`}>{e.name}</Link></div><div className="col"><DeleteCampus campusId={e.id}/></div></div><div className="row"><div style={{ position: "relative" }} className="col"><img style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "200px", height: "200px" }} src={e.imageUrl}/></div></div></div></li>);
+					return (<li className="d-flex justify-content-center" style={{ minHeight: "350px", marginTop: "40px", marginBottom: "40px" }}><div className="container" style={{ width: "40%", position: "relative" }}><div className="row"><div style={{ position: "relative" }} className="col-10"><Link to={`/wizarding-schools/${e.id}`}>{e.name}</Link></div><div className="col-2"><DeleteCampus campusId={e.id}/></div></div><div className="row"><div className="col d-flex justify-content-center align-items-center"><img className="mt-4" style={{ width: "200px", height: "200px" }} src={e.imageUrl}/></div></div></div></li>);
 				}));
 			})
 	}, [render])

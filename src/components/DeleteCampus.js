@@ -8,11 +8,24 @@ const DeleteCampus = ({ campusId }) => {
 
 	const deleteCampusFunc = () => {
 		axios.delete(`http://localhost:3000/api/deleteCampus/${campusId}`).then(setRender(!render));
-	}
+	};
+	const buttonLinkStyle = {
+  	display: "inline-block",
+        fontSize: "30px",
+	color: "#f44336",
+	border: "none",
+	borderRadius: "5px",
+	textDecoration: "none",
+	cursor: "pointer"
+  };
+  const buttonLinkHoverStyle = {
+  	color: "#d32f2f"
+  };
+
 
   return (
-    <div>
-	  <button onClick={deleteCampusFunc}>X</button>
+    <div className="d-flex justify-content-end">
+	  <button onClick={deleteCampusFunc} className="bg-dark text-right mt-0" style={buttonLinkStyle} onMouseEnter={(e) => e.target.style.color = buttonLinkHoverStyle.color} onMouseLeave={(e) => e.target.style.color = buttonLinkStyle.color}>X</button>
     </div>
   );
 };
