@@ -40,7 +40,7 @@ const Campus = () => {
 			.then((data) => {
 				setCampusLI(<li className="container">
 					<div className="row"><h1 className="text-center text-light col">{data.dataValues.name}</h1></div>
-					<div className="row" style={{ position: "relative" }}><img style={{ heigt: "300px", width: "300px" }} className={`col ${centerStyle}`} src={data.dataValues.imageUrl}/></div>
+					<div className="row" style={{ position: "relative" }}><img style={{ height: "300px", width: "300px" }} className={`col ${centerStyle}`} src={data.dataValues.imageUrl}/></div>
 					<div className="row text-center"><h3 className="col text-light">Students</h3><br /> <br /></div>
 					<div className="row text-center">
 						<div className="col">
@@ -61,7 +61,7 @@ const Campus = () => {
 			<div className="bg-dark">
 				<SingleCampusRender.Provider value={{ render, setRender }}>
 					<br />
-					<div className={`d-flex align-items-center justify-content-center ${buttonLinkStyle}`} style={{ width: "17%", minHeight: "70px", marginLeft: "10px", backgroundColor: "#3e444b"}} onMouseEnter={(e) => e.target.style.backgroundColor = buttonLinkHoverStyle.backgroundColor} onMouseLeave={(e) => e.target.style.backgroundColor = buttonLinkStyle.backgroundColor}><Link to="/wizarding-schools">{"<-- All Campuses"}</Link></div><br />
+					<Link className={`d-flex align-items-center justify-content-center ${buttonLinkStyle}`} style={{ width: "17%", minHeight: "70px", marginLeft: "10px", backgroundColor: "#3e444b"}} onMouseEnter={(e) => e.target.style.backgroundColor = buttonLinkHoverStyle.backgroundColor} onMouseLeave={(e) => e.target.style.backgroundColor = buttonLinkStyle.backgroundColor} to="/wizarding-schools">{"<-- All Campuses"}</Link><br />
 					<div className="d-flex justify-content-center">
 							<ul className="flex-fill">{campusLI}</ul>
 					</div>

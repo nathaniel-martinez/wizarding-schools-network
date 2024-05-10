@@ -1,10 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { SingleStudentRender } from "./RenderContext.js";
 import axios from "axios";
 
 
 const UpdateStudent = ({ studentId }) => {
 	const { render, setRender } = useContext(SingleStudentRender);
+	const [ email, setEmail ] = useState('');
+	const [ isValid, setIsValid ] = useState(true);
+
 	const submitForm = (e) => {
 		e.preventDefault();
 		const target = e.target.action;
@@ -32,12 +35,10 @@ const UpdateStudent = ({ studentId }) => {
 	  	onSubmit={submitForm}
 	  	method="POST"
 	  	className="updateStudent">
-	  		<div><input type="text" placeholder="First Name" name="firstName"/></div>
-	  		<div><input type="text" placeholder="Last Name" name="lastName"/></div>
-	  		<div><input type="text" placeholder="Email" name="email"/></div>
-	  		<div><input type="text" placeholder="Image url" name="imageUrl"/></div>
-	  		<div><input type="text" placeholder="Campus Id" name="campusId"/></div>
-	  		<div><button type="submit">Update Student</button></div>
+	  		<div><input className="form-control" type="text" placeholder="First Name" name="firstName"/></div>
+	  		<div><input className="form-control" type="text" placeholder="Last Name" name="lastName"/></div>
+	  		<div><input className="form-control" type="email" placeholder="Email" name="email"/></div>
+	  		<div><button className="btn btn-light" type="submit">Update Student</button></div>
 	  </form>
     </div>
   );
