@@ -7,7 +7,7 @@ const DeleteCampus = ({ campusId }) => {
 	const { render, setRender } = useContext(CampusRender);
 
 	const deleteCampusFunc = () => {
-		axios.delete(`http://localhost:3000/api/deleteCampus/${campusId}`).then(setRender(!render));
+		axios.delete(`http://localhost:3000/api/deleteCampus/${campusId}`).then(() => setRender(!render));
 	};
 	const buttonLinkStyle = {
   	display: "inline-block",
@@ -24,7 +24,7 @@ const DeleteCampus = ({ campusId }) => {
 
 
   return (
-    <div className="d-flex justify-content-end">
+    <div className="d-flex justify-content-end align-items-start" style={{marginTop: "5px"}}>
 	  <button onClick={deleteCampusFunc} className="bg-dark text-right mt-0" style={buttonLinkStyle} onMouseEnter={(e) => e.target.style.color = buttonLinkHoverStyle.color} onMouseLeave={(e) => e.target.style.color = buttonLinkStyle.color}>X</button>
     </div>
   );

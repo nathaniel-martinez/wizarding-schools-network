@@ -7,7 +7,7 @@ const DeleteStudent = ({ studentId }) => {
 	const { render, setRender } = useContext(StudentRender);
 
 	const deleteStudentFunc = () => {
-		axios.delete(`http://localhost:3000/api/deleteStudent/${studentId}`).then(setRender(!render));
+		axios.delete(`http://localhost:3000/api/deleteStudent/${studentId}`).then(() => setRender(!render));
 	}
 
   return (

@@ -16,6 +16,20 @@ const Campus = () => {
 		left: "50%",
 		transform: "translate(-50%, -50%)"
 	};
+	  const buttonLinkStyle = {
+		display: "inline-block",
+		padding: "10px 20px",
+		fontSize: "16px",
+		color: "#f8f9fa",
+		backgroundColor: "#3e444b",
+		border: "none",
+		borderRadius: "5px",
+		textDecoration: "none",
+		cursor: "pointer"
+	  };
+	  const buttonLinkHoverStyle = {
+		backgroundColor: "#292e33"
+	  };
 	useEffect(() => {
 		axios.get(`http://localhost:3000/api/singleCampus/${wizardingSchoolId}`)
 			.then((res) => {
@@ -24,14 +38,16 @@ const Campus = () => {
 				return data;
 			})
 			.then((data) => {
-				setCampusLI(<li>
-					<h1 className="text-center text-light">{data.dataValues.name}</h1>
-					<img style={{ heigt: "500px", width: "500px" }} className={centerStyle} src={data.dataValues.imageUrl}/>
-					<div>Students</div>
-					<div>
+				setCampusLI(<li className="container">
+					<div className="row"><h1 className="text-center text-light col">{data.dataValues.name}</h1></div>
+					<div className="row" style={{ position: "relative" }}><img style={{ heigt: "300px", width: "300px" }} className={`col ${centerStyle}`} src={data.dataValues.imageUrl}/></div>
+					<div className="row text-center"><h3 className="col text-light">Students</h3><br /> <br /></div>
+					<div className="row text-center">
+						<div className="col">
 						{data.students.map((e) => {
-							return(<div><Link to={`/students/${e.id}`}>{e.firstName}</Link><UnenrollStudent studentId={e.id}/></div>);
+							return(<div><Link to={`/students/${e.id}`} style={{marginRight: "10px"}}>{e.firstName}</Link>  <UnenrollStudent studentId={e.id}/></div>);
 						})}
+						</div>
 					</div>
 				</li>);
 			})
@@ -44,9 +60,10 @@ const Campus = () => {
 		return(
 			<div className="bg-dark">
 				<SingleCampusRender.Provider value={{ render, setRender }}>
+					<br />
+					<div className={`d-flex align-items-center justify-content-center ${buttonLinkStyle}`} style={{ width: "17%", minHeight: "70px", marginLeft: "10px", backgroundColor: "#3e444b"}} onMouseEnter={(e) => e.target.style.backgroundColor = buttonLinkHoverStyle.backgroundColor} onMouseLeave={(e) => e.target.style.backgroundColor = buttonLinkStyle.backgroundColor}><Link to="/wizarding-schools">{"<-- All Campuses"}</Link></div><br />
 					<div className="d-flex justify-content-center">
 							<ul className="flex-fill">{campusLI}</ul>
-							<div className="flex-fill"><UpdateCampus campusId={wizardingSchoolId}/></div>
 					</div>
 				</SingleCampusRender.Provider>
 			</div>
